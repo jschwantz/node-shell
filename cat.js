@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-const cat = (secondCmd) => {
+const cat = (secondCmd, done) => {
   fs.readFile(secondCmd, 'utf8', (err, data) => {
     if (err) throw err;
-    console.log(data);
+    done(data);
   })
 }
 

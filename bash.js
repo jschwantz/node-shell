@@ -1,6 +1,11 @@
 const pwd = require('./pwd');
 const ls = require('./ls');
 const cat = require('./cat');
+const curl = require('./curl');
+const done = (output) => {
+  process.stdout.write(output);
+  process.stdout.write('\nprompt >');
+}
 
 process.stdout.write('prompt > ');
 
@@ -9,13 +14,13 @@ process.stdin.on('data', (data) => {
   const firstCmd = cmd[0];
   const secondCmd = cmd[1];
 
-  // process.stdout.write('You typed: ' + cmd);
-
   if (firstCmd === 'pwd') {
-    pwd();
+    pwd(done);
   } else if (firstCmd === 'ls') {
-    ls();
+    ls(done);
   } else if (firstCmd === 'cat') {
-    cat(secondCmd);
+    cat(secondCmd, done);
+  } else if (firstCmd === 'curl') {
+    curl(secondCmd, done);
   }
 });
